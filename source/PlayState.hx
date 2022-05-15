@@ -137,6 +137,15 @@ class PlayState extends MusicBeatState
 	public var eventNotes:Array<Dynamic> = [];
 
 	private var strumLine:FlxSprite;
+	
+	//Soni things for potatoes pc
+	var dead:FlxSprite;
+	
+	//bil-letes
+	var nose:Float;
+	var shader:BitmapFilter;
+	var bilSucks:Float = 0;
+	var filters:Array<BitmapFilter> = [];
 
 	//Handles the new epic mega sexy cam code that i've done
 	private var camFollow:FlxPoint;
@@ -217,6 +226,11 @@ class PlayState extends MusicBeatState
 	var bgGirls:BackgroundGirls;
 	var wiggleShit:WiggleEffect = new WiggleEffect();
 	var bgGhouls:BGSprite;
+
+	//werhog
+	var ice2:BGSprite;
+	var ice1:BGSprite;
+	var ice3:BGSprite;
 
 	public var songScore:Int = 0;
 	public var songHits:Int = 0;
