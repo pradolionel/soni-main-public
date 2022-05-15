@@ -368,6 +368,257 @@ class PlayState extends MusicBeatState
 
 		switch (curStage)
 		{
+			case 'werhog':
+				var bg:BGSprite = new BGSprite('werhog/Sky_Werhog', -500, -400, .3, .3);
+				add(bg);
+
+				var water:BGSprite = new BGSprite('werhog/Back_waterNince_Werhog', -300, 250, .5, .5);
+				water.scale.set(1.2, 0.9);
+				water.updateHitbox();
+				add(water);
+
+				ice1 = new BGSprite('werhog/IceBlock_1_Werhog', 215, 640, .7, .7, ['Ice1 instancia 1'], true);
+				ice1.scale.set(1.2, 1.2);
+				ice1.dance();
+				add(ice1);
+
+				ice2 = new BGSprite('werhog/IceBlock_2_Werhog', 1300, 450, .7, .7, ['Ice 2 instancia 1'], true);
+				ice2.scale.set(1.2, 1.2);
+				ice2.dance();
+				add(ice2);
+
+				ice3 = new BGSprite('werhog/Main_IceBlock_Werhog', 270, 950, 1, 1, ['Ice plataform instancia 1'], true);
+				ice3.scale.set(1.2, 1.2);
+				ice3.dance();
+				add(ice3);
+
+				//50, 20
+			case 'soni':
+				/*GameOverSubstate.characterName = 'befe-moto'; //Test
+				GameOverSubstate.deathSoundName = 'moto-loss';*/
+
+				var bg:BGSprite = new BGSprite('soni/Cielo', 0, 0, .3,.3);
+				bg.scale.set(2, 2);
+				bg.antialiasing = ClientPrefs.globalAntialiasing;
+				add(bg);
+
+				var clouds:BGSprite = new BGSprite('soni/Nubes', 0, 0, .4, 1);
+				clouds.scale.set(2, 2);
+				clouds.antialiasing = ClientPrefs.globalAntialiasing;
+				if(!ClientPrefs.lowQuality)
+					add(clouds);
+				
+				var mountains:BGSprite = new BGSprite('soni/Montanas', 0, 0, .6, 1);
+				mountains.scale.set(2, 2);
+				mountains.antialiasing = ClientPrefs.globalAntialiasing;
+				add(mountains);
+				
+				var rocoFloor:BGSprite = new BGSprite('soni/PisoRocoso', 0, 0, .7, 1);
+				rocoFloor.scale.set(2, 2);
+				rocoFloor.antialiasing = ClientPrefs.globalAntialiasing;
+				add(rocoFloor);
+
+				var river:BGSprite = new BGSprite('soni/Rio', 0, 0, .7, 1);
+				river.scale.set(2, 2);
+				river.antialiasing = ClientPrefs.globalAntialiasing;
+				add(river);
+
+				var treesBG:BGSprite = new BGSprite('soni/ArbolesDeFondo', 0, 0, .8, 1);
+				treesBG.scale.set(2, 2);
+				treesBG.antialiasing = ClientPrefs.globalAntialiasing;
+				add(treesBG);
+
+				var tree:BGSprite = new BGSprite('soni/Arbolprincipal', 0, 0, .85, 1);
+				tree.scale.set(2, 2);
+				tree.antialiasing = ClientPrefs.globalAntialiasing;
+				add(tree);
+
+				var goldenFlower:BGSprite = new BGSprite('soni/FlorDorada', 0, 0, .9, 1);
+				goldenFlower.scale.set(2, 2);
+				add(goldenFlower);
+
+				var floor:BGSprite = new BGSprite('soni/Piso', 0, 0, 1, 1);
+				floor.scale.set(2, 2);
+				add(floor);
+
+				var purpFlower:BGSprite = new BGSprite('soni/FloresMoradas', 0, 0, .95, 1);
+				purpFlower.scale.set(2, 2);
+				add(purpFlower);
+
+				var bgAnim:BGSprite = new BGSprite('soni/BackgroundA', -170, -250, .75, .75, ['BackgroundA'], true);
+				bgAnim.scale.set(2, 2);
+				bgAnim.visible = false;
+				add(bgAnim);
+
+				dead = new FlxSprite();
+				dead.frames = Paths.getSparrowAtlas('soni/dead tais reported !!!!'); //Soni is the sus?!?! ding ding ding ding ding ding ding- ding ding ding tuntun
+				dead.animation.addByPrefix('report', 'me muero', 24, false);
+				dead.screenCenter();
+				dead.antialiasing = ClientPrefs.globalAntialiasing;
+				dead.cameras = [camOther];
+				dead.visible = false;
+				add(dead);
+
+				var smoke:Smoke;
+				smoke = new Smoke();
+				smoke.cameras = [camOther];
+
+				var soniBeats:Int = 0; //BRUHHH
+				curBeatSection = function()
+				{
+					soniBeats++;
+					if(Paths.formatToSongPath(SONG.song) == 'sped') 
+					{
+						switch(soniBeats)
+						{
+							/*case 328:
+								add(funny);
+								FlxTween.tween(funny, {alpha: .3}, 27.43, {ease: FlxEase.quadInOut});
+							case 392:
+								FlxTween.tween(funny, {alpha: 0}, 1.34, {ease: FlxEase.quadInOut, onComplete: function(twn:FlxTween){remove(funny);}});*/
+							case 739:
+								add(smoke);
+							case 741:
+								GameOverSubstate.characterName = 'befe-moto';
+								GameOverSubstate.deathSoundName = 'moto-loss';
+								bgAnim.visible = true;
+								bgAnim.dance();
+								gf.visible = false;
+								remove(bg);
+								if(!ClientPrefs.lowQuality)
+									remove(clouds);
+								remove(mountains);
+								remove(rocoFloor);
+								remove(river);
+								remove(treesBG);
+								remove(tree);
+								remove(goldenFlower);
+								remove(floor);
+								remove(purpFlower);
+								dadGroup.x = -168;
+								dadGroup.y = -13; //cuanto mas me la mamas mas me crece, aquí tiene pa que me la bese, entre más me la beses más me crece, busca un cura pa que me la rece, y trae un martillo pa que me la endereces, por el chiquito se te aparece toas las veces y cuando te estreses aquí te tengo éste pa que te desestreses, con este tallo el culo se te esflorece, se cumple el ciclo hasta que anochece, todos los días y todas las veces, de tanto entablar la raja del culo se te desaparece, porque este sable no se compadece, si pides ñapa se te ofrece, y si repites se te agradece, no te hace rico pero tampoco te empobrece, no te hace inteligente pero tampoco te embrutece, y no paro aquí compa que éste nuevamente se endurece, hasta que amanece, cambie esa cara que parece que se entristece, si te haces viejo éste te rejuvenece, no te hago bulla porque depronto te ensordece, y eso cuadro no te favorece, pero tranquilo que éste te abastece, porque allá abajo se te humedece, viendo como el que me cuelga resplandece, si a ti te da miedo a mí me enorgullece, y así toas las vece ¿que te parece?, y tranquilo mijo que aquí éste reaparece, no haga fuerza porque éste se sobrecrece, una fresadora te traigo pa que me la freses, así se fortalece y de nuevo la historia se establece, que no se te nuble la vista porque éste te la aclarece, y sino le entendiste nuevamente la explicación se te ofrece, pa que por el chiquito éste de nuevo te empiece... Aquí tienes para que me la beses, entre más me la beses más me crece, busca un cura para que me la rece, un martillo para que me la endereces, un chef para que me la aderece, 8000 pijas por el culo se te aparecen, si me la sobas haces que se me espese, si quieres la escaneas y te la llevas para que en tu hoja de vida la anexes, me culeo a tu maldita madre y qué te parece le meti la pija a tú mamá hace 9 meses y después la puse a escuchar René de Calle 13 Te la meto por debajo del agua como los peces, y aquella flor de pija que en tu culo crece
+								boyfriendGroup.x = 962;
+								boyfriendGroup.y = 77; //OMG I LOVE U YOSHI ENGINE STAGE EDITOR UWUWUUWU
+							}
+					}
+				}
+
+			case 'ou':
+				GameOverSubstate.characterName = 'befe-ou';
+
+				var bg:BGSprite = new BGSprite('ou/ou-bg', -650, -600, .9,.9);
+				add(bg);
+
+				var black:FlxSprite = new FlxSprite().makeGraphic(FlxG.width,FlxG.height,FlxColor.BLACK);
+				black.cameras = [camHUD];
+				black.visible = false;
+				add(black);
+			
+				var ouBeats:Int = 0;
+				curBeatSection = function()
+				{
+					ouBeats++;
+					if(Paths.formatToSongPath(SONG.song) == 'ou') 
+					{
+						switch(ouBeats)
+						{
+							case 716:
+								black.visible = true;
+						}
+					}
+				}
+			case 'idk-lol':
+				var bg:BGSprite = new BGSprite('bruh/bggg',0,0);
+				add(bg);
+
+			case 'neobeat':
+				GameOverSubstate.characterName = 'royal';
+
+				camHUD.zoom = 3;
+
+				var blueXD:BGSprite = new BGSprite('whyimakingthishelp/bg', -600, -200);
+				blueXD.scale.set(5,5);
+				add(blueXD);
+
+				var discord0:FlxSprite = new FlxSprite().loadGraphic(Paths.image('whyimakingthishelp/discord'));
+				discord0.setGraphicSize(FlxG.width,FlxG.height);
+				discord0.antialiasing = ClientPrefs.globalAntialiasing;
+				discord0.cameras = [camOther];
+				discord0.screenCenter();
+				add(discord0);
+		
+				var discord1:FlxSprite = new FlxSprite().loadGraphic(Paths.image('whyimakingthishelp/discord1'));
+				discord1.setGraphicSize(FlxG.width,FlxG.height);
+				discord1.antialiasing = ClientPrefs.globalAntialiasing;
+				discord1.visible = false;
+				discord1.cameras = [camOther];
+				discord1.screenCenter();
+				add(discord1);
+		
+				var discord2:FlxSprite = new FlxSprite().loadGraphic(Paths.image('whyimakingthishelp/discord2'));
+				discord2.setGraphicSize(FlxG.width,FlxG.height);
+				discord2.antialiasing = ClientPrefs.globalAntialiasing;
+				discord2.visible = false;
+				discord2.cameras = [camOther];
+				discord2.screenCenter();
+				add(discord2);
+		
+				var discord3:FlxSprite = new FlxSprite().loadGraphic(Paths.image('whyimakingthishelp/discord3'));
+				discord3.setGraphicSize(FlxG.width,FlxG.height);
+				discord3.antialiasing = ClientPrefs.globalAntialiasing;
+				discord3.visible = false;
+				discord3.cameras = [camOther];
+				discord3.screenCenter();
+				add(discord3);
+
+				var neosteps:Int; //No neobeats
+				curStepSection = function()
+				{
+					neosteps++;
+					if(Paths.formatToSongPath(SONG.song) == 'please')
+					{
+						switch(neosteps)
+						{
+							case 1:
+								discord0.visible = false;
+								discord1.visible = true;
+							case 40:
+								discord1.visible = false;
+								discord2.visible = true;
+							case 45:
+								discord2.visible = false;
+								discord3.visible = true;
+							case 53:
+								camOther.flash(FlxColor.WHITE, 1);
+								discord3.visible = false;
+						}
+					}
+				}
+
+			case 'nft': //Bil lmaooo
+				var bg:FlxSprite = new FlxSprite().makeGraphic(5000,5000,FlxColor.WHITE);
+				add(bg);
+
+				/*var perg:BGSprite = new BGSprite('bil-letes/pergamine', gf.getGraphicMidpoint().x, gf.getGraphicMidpoint().y);
+				perg.visible = false;
+				add(perg);*/
+
+				var bilBeats:Int;
+				curBeatSection = function()
+				{
+					bilBeats++;
+					if(Paths.formatToSongPath(SONG.song) == 'broken-reality')
+					{
+						switch(bilBeats)
+						{
+							case 223:
+								for (i in opponentStrums) {
+									FlxTween.tween(i, {alpha: 0}, 1.39, {ease: FlxEase.linear});
+								}
+						}
+					}
+				}
+				
 			case 'stage': //Week 1
 				var bg:BGSprite = new BGSprite('stageback', -600, -200, 0.9, 0.9);
 				add(bg);
